@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -44,11 +45,13 @@ export default function UserInfo() {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
-                alt=""
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
-              />
+              <Image
+  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+  alt="Company Logo"
+  width={100} // Set appropriate width
+  height={50} // Set appropriate height
+  priority // Optional: Preloads the image for better performance
+/>
             </a>
           </div>
           <button
