@@ -55,7 +55,7 @@ const ShuffleHero = () => {
   }, []);
 
   return (
-    <main className="px-20 w-full">
+    <main className="relative px-20 w-full h-[100%]">
       <div className="flex justify-between">
         <p className="text-sm md:text-base text-gray-700">
           It's <span className="text-rose-600">{`${timeData.time}`}</span>
@@ -67,6 +67,7 @@ const ShuffleHero = () => {
           Date: <span className="text-rose-600">{`${timeData.day}`}</span>
         </p>
       </div>
+      <div className=" min-h-[500px] h-[100%] flex flex-col justify-between">
       <section className="w-full">
         <div >
           <span className="block mb-4 text-xs md:text-xl text-gray-800 font-medium">
@@ -89,13 +90,8 @@ const ShuffleHero = () => {
             </button> */}
             <SearchBar />
             </div>
-            <div className="mt-6 w-full max-w-xl">
-        {/* <ProductList /> */}
-      </div>
 
-      <div className="mt-10 w-full max-w-xl">
-        <AddGroceryList />
-      </div>
+
         </div>
 
         {/* <button>Register</button> */}
@@ -103,9 +99,11 @@ const ShuffleHero = () => {
         {/* <ShuffleGrid /> */}
       </section>
 
-      <div className="flex justify-around">
+      <div className=" flex flex-end items-end justify-around">
+      <AddGroceryList />
       <HomePageForm />
       <SubmissionModal />
+      </div>
       </div>
     </main>
   );

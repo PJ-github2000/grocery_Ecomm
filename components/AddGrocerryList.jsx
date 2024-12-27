@@ -46,7 +46,7 @@ export default function AddGroceryModal() {
   const closeModal = () => {
     setIsOpen(false)
     setMessage('')
-    setItems([{ name: '', price: '', quantity: '' }]) // Reset form on close
+    setItems([{ name: '', price: '', quantity: '' }]) 
   }
 
   return (

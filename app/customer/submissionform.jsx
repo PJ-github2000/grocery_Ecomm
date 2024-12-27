@@ -44,7 +44,7 @@ export default function HomePageForm() {
       {/* Button to open the modal */}
       <button
         onClick={openModal}
-        className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+        className="bg-rose-400 h-[40px] hover:bg-rose-600 text-white font-bold py-2 px-4 rounded"
       >
         Open Form
         <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">

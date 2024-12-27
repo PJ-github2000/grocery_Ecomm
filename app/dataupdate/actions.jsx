@@ -203,4 +203,33 @@ export async function addGroceryList(groceryList) {
     return { success: false, error: 'Failed to add grocery list' }
   }
 }
+function calculateTotal(cart, sgst, cgst, includeSgst, includeCgst) {
+  const subtotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
+  const sgstAmount = includeSgst ? (subtotal * sgst) / 100 : 0;
+  const cgstAmount = includeCgst ? (subtotal * cgst) / 100 : 0;
+  return subtotal + sgstAmount + cgstAmount;
+}
+
+export async function submitCartToDatabase(cart, sgst, cgst, includeSgst, includeCgst) {
+  const db = await getMongoDb()
+  const transactionsCollection = db.collection('transactions')
+
+  const totalBill = calculateTotal(cart, sgst, cgst, includeSgst, includeCgst);
+
+  try {
+    const result = await transactionsCollection.insertOne({
+      items: cart,
+      totalBill,
+      sgst: includeSgst ? sgst : 0,
+      cgst: includeCgst ? cgst : 0,
+      includeSgst,
+      includeCgst,
+      createdAt: new Date()
+    })
+    return { success: true, transactionId: result.insertedId.toString() }
+  } catch (error) {
+    console.error('Submit cart error:', error)
+    return { success: false, error: 'Failed to submit cart data' }
+  }
+}
 
