@@ -4,7 +4,6 @@ import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import ShuffleHero from "./homeSection";
-import AddCustomer from "@/app/customer/page";
 
 export default function UserInfo() {
   const { data: session } = useSession();
@@ -61,7 +60,6 @@ export default function UserInfo() {
         </nav>
       </header>
       <ShuffleHero />
-      <AddCustomer />
     </div>
   );
 }
