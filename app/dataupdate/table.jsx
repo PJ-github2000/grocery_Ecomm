@@ -40,7 +40,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { fetchSubmissions, deleteSubmission } from '../actions'
+import { fetchSubmissions, deleteSubmission } from './actions'
 
 export default function SubmissionsPage() {
   const router = useRouter()
