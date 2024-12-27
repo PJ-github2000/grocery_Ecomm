@@ -1,3 +1,4 @@
+// 'use server' directive is placed within the function
 'use server'
 
 import { getMongoDb } from '../../lib/mangodb-data';
@@ -15,7 +16,7 @@ export async function submitForm(formData) {
       name,
       email,
       message,
-      createdAt: new Date()
+      createdAt: new Date(),
     });
 
     const count = await submissionsCollection.countDocuments();
@@ -26,4 +27,3 @@ export async function submitForm(formData) {
     return { success: false, error: 'Failed to submit form' };
   }
 }
-
