@@ -37,7 +37,7 @@ export const authOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_SECRET,
   pages: {
     signIn: "/",
   },
