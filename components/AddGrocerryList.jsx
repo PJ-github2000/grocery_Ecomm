@@ -93,7 +93,7 @@ export default function AddGroceryModal() {
                     className="w-20 p-2 border rounded"
                     step="0.01"
                   />
-                  <input
+                  {/* <input
                     type="number"
                     value={item.quantity}
                     onChange={(e) =>
@@ -101,7 +101,7 @@ export default function AddGroceryModal() {
                     }
                     placeholder="quantity"
                     className="w-24 p-2 border rounded"
-                  />
+                  /> */}
                   <button
                     type="button"
                     onClick={() => handleRemoveItem(index)}

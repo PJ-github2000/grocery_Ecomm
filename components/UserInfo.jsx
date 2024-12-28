@@ -4,6 +4,8 @@ import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import ShuffleHero from "./homeSection";
+import Image from "next/image";
+import logo from "../public/logo.png"
 
 export default function UserInfo() {
   const { data: session } = useSession();
@@ -42,14 +44,8 @@ export default function UserInfo() {
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              {/* <img
-                alt=""
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
-              /> */}
-            </a>
+          <Image src={logo} alt="Logo" width={140} height={90} />
+
           </div>
           <button
             onClick={() => signOut()}

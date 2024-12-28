@@ -71,13 +71,13 @@ const ShuffleHero = () => {
       <div className=" min-h-[500px] h-[100%] flex flex-col justify-between">
       <section className="w-full">
         <div >
-          <span className="block mb-4 text-sm md:text-xl text-gray-800 font-medium">
+          {/* <span className="block mb-4 text-sm md:text-xl text-gray-800 font-medium">
             {greeting}
             <span className=" text-rose-800 text-2xl md:text-5xl capitalize">
               {" "}
               {session?.user?.name}
             </span>
-          </span>
+          </span> */}
           <p className="text-sm md:text-lg text-slate-700 my-4 md:my-6">
           search your products online in the store
           </p>
