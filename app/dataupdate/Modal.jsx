@@ -1,190 +1,40 @@
-// 'use client'
-
-// import { useState, useEffect } from 'react'
-// import { useNavigate } from 'react-router-dom' // Assuming React Router is used
-// import { fetchSubmissions, updateSubmission, deleteSubmission } from './actions'
-
-// export default function SubmissionModal() {
-//   const [isOpen, setIsOpen] = useState(false)
-//   const [submissions, setSubmissions] = useState([])
-//   const [isLoading, setIsLoading] = useState(false)
-//   const [editingId, setEditingId] = useState(null)
-
-//   useEffect(() => {
-//     if (isOpen) {
-//       loadSubmissions()
-//     }
-//   }, [isOpen])
-
-//   async function loadSubmissions() {
-//     setIsLoading(true)
-//     const fetchedSubmissions = await fetchSubmissions()
-//     setSubmissions(fetchedSubmissions)
-//     setIsLoading(false)
-//   }
-
-//   function openModal() {
-//     setIsOpen(true)
-//   }
-
-//   function closeModal() {
-//     setIsOpen(false)
-//     setEditingId(null)
-//   }
-
-//   async function handleEdit(id, updatedData) {
-//     const result = await updateSubmission(id, updatedData)
-//     if (result.success) {
-//       setSubmissions(submissions.map(sub => sub._id === id ? { ...sub, ...updatedData } : sub))
-//       setEditingId(null)
-//     } else {
-//       alert('Failed to update submission')
-//     }
-//   }
-
-//   async function handleDelete(id) {
-//     const result = await deleteSubmission(id)
-//     if (result.success) {
-//       setSubmissions(submissions.filter(sub => sub._id !== id))
-//     } else {
-//       alert('Failed to delete submission')
-//     }
-//   }
-
-//   function handleViewAll() {
-//     navigate('/submissions', { state: { submissions } }) // Navigate to the table page with data
-//   }
-
-//   return (
-//     <>
-//       <button
-//         onClick={openModal}
-//         className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-//       >
-//         View Submissions
-//         <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-//           -&gt;
-//         </span>
-//       </button>
-
-//       {isOpen && (
-//         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-//           <div className="bg-white p-6 rounded-lg max-w-3xl w-full max-h-[80vh] overflow-y-auto">
-//             <h2 className="text-2xl font-bold mb-4">Submissions</h2>
-//             {isLoading ? (
-//               <p>Loading submissions...</p>
-//             ) : submissions.length === 0 ? (
-//               <p>No submissions found.</p>
-//             ) : (
-//               <div className="space-y-4">
-//                 {submissions.map((submission) => (
-//                   <div key={submission._id} className="border p-4 rounded-md">
-//                     {editingId === submission._id ? (
-//                       <EditForm
-//                         submission={submission}
-//                         onSave={(updatedData) => handleEdit(submission._id, updatedData)}
-//                         onCancel={() => setEditingId(null)}
-//                       />
-//                     ) : (
-//                       <>
-//                         <h3 className="font-bold">{submission.name}</h3>
-//                         <p>{submission.email}</p>
-//                         <p>{submission.message}</p>
-//                         <div className="mt-2 space-x-2">
-//                           <button
-//                             onClick={() => setEditingId(submission._id)}
-//                             className="bg-blue-500 text-white px-2 py-1 rounded"
-//                           >
-//                             Edit
-//                           </button>
-//                           <button
-//                             onClick={() => handleDelete(submission._id)}
-//                             className="bg-red-500 text-white px-2 py-1 rounded"
-//                           >
-//                             Delete
-//                           </button>
-//                         </div>
-//                       </>
-//                     )}
-//                   </div>
-//                 ))}
-//               </div>
-//             )}
-//             <button
-//               onClick={closeModal}
-//               className="mt-4 bg-gray-500 text-white px-4 py-2 rounded"
-//             >
-//               Close
-//             </button>
-//             <button
-//               onClick={handleViewAll}
-//               className="mt-4 bg-green-500 text-white px-4 py-2 rounded ml-2"
-//             >
-//               View All in Table
-//             </button>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   )
-// }
-
-// function EditForm({ submission, onSave, onCancel }) {
-//   const [name, setName] = useState(submission.name)
-//   const [email, setEmail] = useState(submission.email)
-//   const [message, setMessage] = useState(submission.message)
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault()
-//     onSave({ name, email, message })
-//   }
-
-//   return (
-//     <form onSubmit={handleSubmit} className="space-y-2">
-//       <input
-//         type="text"
-//         value={name}
-//         onChange={(e) => setName(e.target.value)}
-//         placeholder="Name"
-//         required
-//         className="w-full p-2 border rounded"
-//       />
-//       <input
-//         type="email"
-//         value={email}
-//         onChange={(e) => setEmail(e.target.value)}
-//         placeholder="Email"
-//         required
-//         className="w-full p-2 border rounded"
-//       />
-//       <textarea
-//         value={message}
-//         onChange={(e) => setMessage(e.target.value)}
-//         placeholder="Message"
-//         required
-//         className="w-full p-2 border rounded"
-//       ></textarea>
-//       <div className="space-x-2">
-//         <button type="submit" className="bg-green-500 text-white px-2 py-1 rounded">Save</button>
-//         <button type="button" onClick={onCancel} className="bg-gray-500 text-white px-2 py-1 rounded">Cancel</button>
-//       </div>
-//     </form>
-//   )
-// }
-
-
-
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { useToast } from "@/components/ui/use-toast"
+import { fetchSubmissions, updateSubmission, deleteSubmission } from './actions'
 
 export default function SubmissionButton() {
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
+  const [submissions, setSubmissions] = useState([])
+  const [editingCell, setEditingCell] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
 
-  function handleViewSubmissions() {
-    router.push('/submissions') // Navigate to the submissions page
+  useEffect(() => {
+    if (isOpen) {
+      fetchSubmissionsData()
+    }
+  }, [isOpen])
+
+  async function fetchSubmissionsData() {
+    setIsLoading(true)
+    try {
+      const data = await fetchSubmissions()
+      setSubmissions(data)
+    } catch (error) {
+      console.error('Error fetching submissions:', error)
+      toast({
+        title: "Error",
+        description: "Failed to fetch submissions. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   function openModal() {
@@ -193,56 +43,154 @@ export default function SubmissionButton() {
 
   function closeModal() {
     setIsOpen(false)
+    setEditingCell(null)
+  }
+
+  function handleEdit(id, field) {
+    setEditingCell({ id, field })
+  }
+
+  async function handleSave(id, field, value) {
+    try {
+      const result = await updateSubmission(id, { [field]: value })
+      if (result.success) {
+        setSubmissions(submissions.map(sub => 
+          sub._id === id ? { ...sub, [field]: value } : sub
+        ))
+        setEditingCell(null)
+        toast({
+          title: "Success",
+          description: "Submission updated successfully.",
+        })
+      } else {
+        throw new Error(result.error || 'Failed to update submission')
+      }
+    } catch (error) {
+      console.error('Error updating submission:', error)
+      toast({
+        title: "Error",
+        description: "Failed to update submission. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
+  async function handleDelete(id) {
+    try {
+      const result = await deleteSubmission(id)
+      if (result.success) {
+        setSubmissions(submissions.filter(sub => sub._id !== id))
+        toast({
+          title: "Success",
+          description: "Submission deleted successfully.",
+        })
+      } else {
+        throw new Error(result.error || 'Failed to delete submission')
+      }
+    } catch (error) {
+      console.error('Error deleting submission:', error)
+      toast({
+        title: "Error",
+        description: "Failed to delete submission. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
+  function EditableCell({ submission, field }) {
+    const isEditing = editingCell?.id === submission._id && editingCell.field === field
+    const value = submission[field]
+
+    if (isEditing) {
+      return (
+        <Input
+          defaultValue={value}
+          onBlur={(e) => handleSave(submission._id, field, e.target.value)}
+          autoFocus
+        />
+      )
+    }
+
+    return (
+      <div onClick={() => handleEdit(submission._id, field)}>
+        {value}
+      </div>
+    )
   }
 
   return (
     <div>
-      <button
-        onClick={openModal}
-        className="bg-rose-400 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded"
-      >
+      <Button onClick={openModal} variant="default" className="bg-rose-400 hover:bg-rose-500">
         View Submissions
-      </button>
+      </Button>
 
       {isOpen && (
-        <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-
-            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                      Submissions
-                    </h3>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Here you can view all submissions.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+          <div className="relative w-auto max-w-4xl mx-auto my-6">
+            <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
+              <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
+                <h3 className="text-3xl font-semibold">
+                  Submissions
+                </h3>
                 <button
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={handleViewSubmissions}
-                >
-                  View All Submissions
-                </button>
-                <button
-                  type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="float-right p-1 ml-auto text-3xl font-semibold leading-none text-black bg-transparent border-0 outline-none opacity-5 focus:outline-none"
                   onClick={closeModal}
                 >
-                  Close
+                  <span className="block w-6 h-6 text-2xl text-black bg-transparent outline-none opacity-5 focus:outline-none">
+                    ×
+                  </span>
                 </button>
+              </div>
+              <div className="relative flex-auto p-6">
+                {isLoading ? (
+                  <div className="flex justify-center items-center h-32">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                  </div>
+                ) : (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Email</TableHead>
+                        <TableHead>Phone Number</TableHead>
+                        <TableHead>Created At</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {submissions.map((submission) => (
+                        <TableRow key={submission._id}>
+                          <TableCell>
+                            <EditableCell submission={submission} field="name" />
+                          </TableCell>
+                          <TableCell>
+                            <EditableCell submission={submission} field="email" />
+                          </TableCell>
+                          <TableCell>
+                            <EditableCell submission={submission} field="PhoneNumber" />
+                          </TableCell>
+                          <TableCell>
+                            {new Date(submission.createdAt).toLocaleString()}
+                          </TableCell>
+                          <TableCell>
+                            <Button 
+                              onClick={() => handleDelete(submission._id)}
+                              variant="destructive"
+                              size="sm"
+                            >
+                              Delete
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                )}
+              </div>
+              <div className="flex items-center justify-end p-6 border-t border-solid rounded-b border-slate-200">
+                <Button onClick={closeModal} variant="outline" className="mr-2">
+                  Close
+                </Button>
               </div>
             </div>
           </div>
@@ -251,5 +199,4 @@ export default function SubmissionButton() {
     </div>
   )
 }
-
 

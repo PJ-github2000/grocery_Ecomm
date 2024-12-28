@@ -7,6 +7,7 @@ import HomePageForm from "@/app/customer/submissionform";
 import SearchBar from "./searchBar";
 import ProductList from "./productList";
 import AddGroceryList from "./AddGrocerryList";
+import RecentTransactions from "@/app/recenttransactions/page";
 
 
 const ShuffleHero = () => {
@@ -55,8 +56,8 @@ const ShuffleHero = () => {
   }, []);
 
   return (
-    <main className="relative px-20 w-full h-[100%]">
-      <div className="flex justify-between">
+    <main className="relative px-8 md:px-10 w-full h-[100%]">
+      <div className="flex justify-between flex-wrap gap-4 mb-10 items-start">
         <p className="text-sm md:text-base text-gray-700">
           It&apos;s <span className="text-rose-600">{`${timeData.time}`}</span>
         </p>
@@ -70,14 +71,14 @@ const ShuffleHero = () => {
       <div className=" min-h-[500px] h-[100%] flex flex-col justify-between">
       <section className="w-full">
         <div >
-          <span className="block mb-4 text-xs md:text-xl text-gray-800 font-medium">
+          <span className="block mb-4 text-sm md:text-xl text-gray-800 font-medium">
             {greeting}
-            <span className=" text-rose-800 md:text-5xl capitalize">
+            <span className=" text-rose-800 text-2xl md:text-5xl capitalize">
               {" "}
               {session?.user?.name}
             </span>
           </span>
-          <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
+          <p className="text-sm md:text-lg text-slate-700 my-4 md:my-6">
           search your products online in the store
           </p>
           <div className="relative w-full">
@@ -99,10 +100,11 @@ const ShuffleHero = () => {
         {/* <ShuffleGrid /> */}
       </section>
 
-      <div className=" flex flex-end items-end justify-around">
+      <div className=" flex flex-end items-end flex-wrap gap-10 justify-around">
       <AddGroceryList />
       <HomePageForm />
       <SubmissionModal />
+      <RecentTransactions />
       </div>
       </div>
     </main>

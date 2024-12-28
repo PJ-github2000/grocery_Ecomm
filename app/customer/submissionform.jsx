@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { useState } from 'react';
-import { submitForm } from './actions';
+import { useState } from "react";
+import { submitForm } from "./actions";
 
 export default function HomePageForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,7 +12,7 @@ export default function HomePageForm() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
     setIsModalOpen(false);
-    setError(null); // Clear error when closing
+    setError(null); 
   };
 
   async function handleSubmit(event) {
@@ -27,13 +27,17 @@ export default function HomePageForm() {
       if (result.success) {
         setCount(result.count);
         event.target.reset(); // Reset form fields after successful submission
-        closeModal(); // Close modal after submission
+        closeModal(); 
       } else {
-        setError(result.error || 'An error occurred while submitting the form.');
+        setError(
+          result.error || "An error occurred while submitting the form."
+        );
       }
     } catch (error) {
-      console.error('Submission error:', error);
-      setError('An error occurred while submitting the form. Please try again.');
+      console.error("Submission error:", error);
+      setError(
+        "An error occurred while submitting the form. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -59,47 +63,62 @@ export default function HomePageForm() {
             <h2 className="text-2xl font-bold">Submit Form</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  required 
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  required 
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                <textarea 
-                  id="message" 
-                  name="message" 
-                  required 
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                ></textarea>
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="PhoneNumber"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="PhoneNumber"
+                  name="PhoneNumber"
+                  required
+                  maxlength="10"
+                  placeholder="Enter 10-digit phone number"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                />
               </div>
               <button
                 type="submit"
                 className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Submitting...' : 'Submit'}
+                {isSubmitting ? "Submitting..." : "Submit"}
               </button>
             </form>
-            {error && (
-              <p className="mt-4 text-center text-red-600">
-                {error}
-              </p>
-            )}
+            {error && <p className="mt-4 text-center text-red-600">{error}</p>}
             {count !== null && (
               <p className="mt-4 text-center text-green-600">
                 Form submitted successfully! Total submissions: {count}

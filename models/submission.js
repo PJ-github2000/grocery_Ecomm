@@ -7,10 +7,9 @@ const SubmissionSchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
   },
-  message: {
-    type: String,
+  PhoneNumber: {
+    type: number,
     required: true,
   },
 }, { timestamps: true });

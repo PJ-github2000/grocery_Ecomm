@@ -9,13 +9,13 @@ export async function submitForm(formData) {
 
   const name = formData.get('name')
   const email = formData.get('email')
-  const message = formData.get('message')
+  const PhoneNumber = formData.get('PhoneNumber')
 
   try {
     await submissionsCollection.insertOne({
       name,
       email,
-      message,
+      PhoneNumber,
       createdAt: new Date()
     })
 
@@ -43,6 +43,7 @@ export async function fetchSubmissions() {
     return []
   }
 }
+
 
 export async function updateSubmission(id, updatedData) {
   const db = await getMongoDb()
@@ -233,3 +234,23 @@ export async function submitCartToDatabase(cart, sgst, cgst, includeSgst, includ
   }
 }
 
+export async function fetchRecentTransactions(limit = 15) {
+  const db = await getMongoDb();
+  const transactionsCollection = db.collection('transactions');
+
+  try {
+    const transactions = await transactionsCollection
+      .find({})
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .toArray();
+
+    return transactions.map(transaction => ({
+      ...transaction,
+      _id: transaction._id.toString(),
+    }));
+  } catch (error) {
+    console.error('Fetch recent transactions error:', error);
+    return [];
+  }
+}

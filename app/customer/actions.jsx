@@ -9,13 +9,13 @@ export async function submitForm(formData) {
 
   const name = formData.get('name');
   const email = formData.get('email');
-  const message = formData.get('message');
+  const PhoneNumber = formData.get('PhoneNumber');
 
   try {
     await submissionsCollection.insertOne({
       name,
       email,
-      message,
+      PhoneNumber,
       createdAt: new Date(),
     });
 
