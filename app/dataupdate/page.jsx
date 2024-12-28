@@ -1,4 +1,4 @@
-import SubmissionButton from '@/components/SubmissionButton'
+import SubmissionButton from './Modal'
 import { Toaster } from "@/components/ui/toaster"
 
 export default function Home() {
