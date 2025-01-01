@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { addGroceryList } from '../app/dataupdate/actions'
+import { Trash2 } from 'lucide-react';
 
 export default function AddGroceryModal() {
   const [isOpen, setIsOpen] = useState(false)
@@ -54,7 +55,7 @@ export default function AddGroceryModal() {
       {/* Initial Add Grocery Button */}
       <button
         onClick={openModal}
-        className="w-fit bg-rose-400 text-white p-2 rounded hover:bg-rose-500"
+        className="w-fit bg-rose-600 text-white text-[16px] px-4 p-2 rounded-md hover:bg-rose-500"
       >
         Add Grocery
       </button>
@@ -62,14 +63,17 @@ export default function AddGroceryModal() {
       {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg w-full max-w-xl relative">
+          <div className="bg-white p-6 rounded-lg w-full max-w-xl ">
+            <div className='flex justify-between  items-center mb-6'>
+            <h2 className="text-2xl font-bold">Add Grocery List</h2>
+
             <button
               onClick={closeModal}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              className=" px-2 py-1 border border-rose-500 rounded-md text-rose-600 top-2 right-2 text-gray-500 hover:text-gray-700"
             >
-              ✕
+            Close
             </button>
-            <h2 className="text-2xl font-bold mb-4">Add Grocery List</h2>
+            </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               {items.map((item, index) => (
                 <div key={index} className="flex space-x-2 items-center">
@@ -108,7 +112,7 @@ export default function AddGroceryModal() {
                     className="bg-rose-50 p-2 rounded text-red-500 hover:text-red-700"
                     title="Remove Item"
                   >
-                    ✕
+                        <Trash2 />
                   </button>
                 </div>
               ))}
@@ -116,13 +120,13 @@ export default function AddGroceryModal() {
               <button
                 type="button"
                 onClick={handleAddItem}
-                className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+                className="w-full bg-slate-500 text-white p-2 rounded hover:bg-blue-600"
               >
                 Add Another Item
               </button>
               <button
                 type="submit"
-                className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600"
+                className="w-full bg-rose-600 text-white p-2 rounded hover:bg-rose-500"
                 disabled={isLoading}
               >
                 {isLoading ? 'Submitting...' : 'Submit Grocery List'}

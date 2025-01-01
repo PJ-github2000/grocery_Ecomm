@@ -6,11 +6,13 @@ import { motion } from "motion/react";
 export const DrawCircleText = () => {
   return (
     <div className="text-yellow-50">
-      <h1 className=" text-center text-rose-300 text-4xl leading-snug">
-      Streamline Grocery{" - "} Login to {" "}
-        <span className="relative text-rose-800">
+      <h1 className=" text-center text-rose-300 text-3xl sm:text-5xl leading-snug">
+      <span className="hidden md:inline-block">
+      Streamline Grocery{" - "}
+        </span> LogIn to {" "}
+        <span className="relative inline-block text-rose-500 font-bold">
         Desu Provisions
-          <svg
+          {/* <svg
             viewBox="0 0 286 73"
             fill="none"
             className="absolute -left-2 -right-2 -top-2 bottom-0 translate-y-1"
@@ -26,9 +28,11 @@ export const DrawCircleText = () => {
               stroke="#ff5350"
               strokeWidth="3"
             />
-          </svg>
+          </svg> */}
         </span>{" "}
-        Now!
+        <span className="hidden md:inline-block">
+          Now!
+        </span>
       </h1>
     </div>
   );

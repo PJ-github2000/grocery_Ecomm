@@ -11,7 +11,7 @@ import f from "../../public/f.jpg";
 
 const TiltedScroll = () => {
   return (
-    <section className="flex justify-center items-center">
+    <section className="flex justify-center items-center hidden md:block">
       <ShuffleGrid />
     </section>
   );

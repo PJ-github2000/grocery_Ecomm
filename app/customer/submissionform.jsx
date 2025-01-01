@@ -48,19 +48,16 @@ export default function HomePageForm() {
       {/* Button to open the modal */}
       <button
         onClick={openModal}
-        className="bg-rose-400 h-[40px] hover:bg-rose-600 text-white font-bold py-2 px-4 rounded"
+        className="bg-rose-600 hover:bg-rose-500 text-white py-2 px-4 rounded-md"
       >
-        Open Form
-        <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-          -&gt;
-        </span>
+        Add Customer
       </button>
 
       {/* Modal for the form */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg max-w-md w-full space-y-4">
-            <h2 className="text-2xl font-bold">Submit Form</h2>
+            <h2 className="text-2xl font-bold text-center">Submit Form</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label
@@ -112,7 +109,7 @@ export default function HomePageForm() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
