@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import ShuffleHero from "./homeSection";
 import Image from "next/image";
 import logo1 from "../public/logo1.jpg"
+import Footer from "@/app/footer/page";
 
 export default function UserInfo() {
   const { data: session } = useSession();
@@ -58,6 +59,9 @@ export default function UserInfo() {
         </nav>
       </header>
       <ShuffleHero />
+      <footer>
+        <Footer/>
+      </footer>
     </div>
   );
 }
