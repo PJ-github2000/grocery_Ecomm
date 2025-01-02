@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import ShuffleHero from "./homeSection";
 import Image from "next/image";
-import logo from "../public/logo.png"
+import logo1 from "../public/logo1.jpg"
 
 export default function UserInfo() {
   const { data: session } = useSession();
@@ -26,7 +26,7 @@ export default function UserInfo() {
 
   return (
     <div>
-      <header>
+      <header className="border-b rounded-2xl border-rose-400 mb-2">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -41,15 +41,17 @@ export default function UserInfo() {
         </div>
         <nav
           aria-label="Global"
-          className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+          className="mx-auto flex items-center justify-between p-3 lg:px-8"
         >
-          <div className="flex lg:flex-1">
-          <Image src={logo} alt="Logo" width={140} height={90} />
+          <div>
+          <Image src={logo1} alt="Logo" className="rounded-xl w-[60px] sm:w-[65px] md:w-[70px] lg:w-[80px] " />
 
           </div>
+          {/* <TranslateButton /> */}
+          <h1 className="font-bold text-2xl hidden sm:block text-rose-600 uppercase">Desu Provisions</h1>
           <button
             onClick={() => signOut()}
-            className="bg-red-400 text-white rounded font-bold px-6 py-2 mt-3"
+            className="bg-rose-600 hover:bg-rose-500 text-white rounded font-bold px-6 py-2 "
           >
             Log Out
           </button>

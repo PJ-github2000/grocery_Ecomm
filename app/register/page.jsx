@@ -23,13 +23,13 @@ export default async function Register() {
           className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
         />
       </div>
-      <div className="h-[100%] py-20 flex flex-col justify-around">
+      <div className="h-[100%] py-14 gap-[60px] flex flex-col justify-center">
       {/* <DrawCircleText /> */}
       <div className="text-yellow-50">
       <h1 className=" text-center text-rose-300 text-3xl sm:text-5xl leading-snug">
       <span className="hidden md:inline-block">
       Streamline Grocery{" - "}
-        </span> SignIn to {" "}
+        </span> Signin to {" "}
         <span className="relative inline-block text-rose-500 font-bold">
         Desu Provisions
         </span>{" "}

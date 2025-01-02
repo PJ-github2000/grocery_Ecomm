@@ -183,27 +183,93 @@ export async function addToCart(productId) {
 }
 
 export async function addGroceryList(groceryList) {
-  const db = await getMongoDb()
-  const productsCollection = db.collection('products')
+  const db = await getMongoDb();
+  const productsCollection = db.collection('products');
 
   try {
+    // Step 1: Check for existing items
+    const itemNames = groceryList.map(item => item.name.trim().toLowerCase());
+    const existingItems = await productsCollection
+      .find({ name: { $in: itemNames } })
+      .toArray();
+
+    if (existingItems.length > 0) {
+      const existingItemNames = existingItems.map(item => item.name).join(', ');
+      return {
+        success: false,
+        error: `Items already exist in the Store: ${existingItemNames}`
+      };
+    }
+
+    // Step 2: Prepare items for insertion
     const items = groceryList.map(item => ({
-      name: item.name,
+      name: item.name.trim(),
       price: parseFloat(item.price) || 0,
-      Quantity: item.quantity || 'Uncategorized',
+      currency: '₹',
+      // Quantity: item.quantity || 'Uncategorized',
       inStock: true,
       createdAt: new Date()
-    }))
-    const result = await productsCollection.insertMany(items)
+    }));
+
+    // Step 3: Insert items
+    const result = await productsCollection.insertMany(items);
     return { 
       success: true, 
-      message: `Added ${Object.keys(result.insertedIds).length} items to the database` 
-    }
+      message: `Added ${Object.keys(result.insertedIds).length} items successfully` 
+    };
   } catch (error) {
-    console.error('Add grocery list error:', error)
-    return { success: false, error: 'Failed to add grocery list' }
+    console.error('Add grocery list error:', error);
+    return { success: false, error: 'Failed to add grocery list' };
   }
 }
+// export async function fetchProducts() {
+//   const db = await getMongoDb()
+//   const productsCollection = db.collection('products')
+
+//   try {
+//     const products = await productsCollection.find({}).toArray()
+//     return products.map(product => ({
+//       ...product,
+//       _id: product._id.toString()
+//     }))
+//   } catch (error) {
+//     console.error('Fetch products error:', error)
+//     return []
+//   }
+// }
+
+// export async function searchProducts(query) {
+//   const db = await getMongoDb()
+//   const productsCollection = db.collection('products')
+
+//   try {
+//     const products = await productsCollection.find({
+//       name: { $regex: query, $options: 'i' }
+//     }).toArray()
+//     return products.map(product => ({
+//       ...product,
+//       _id: product._id.toString()
+//     }))
+//   } catch (error) {
+//     console.error('Search products error:', error)
+//     return []
+//   }
+// }
+
+// export async function deleteProduct(id) {
+//   const db = await getMongoDb()
+//   const productsCollection = db.collection('products')
+
+//   try {
+//     const result = await productsCollection.deleteOne({ _id: new ObjectId(id) })
+//     return { success: result.deletedCount === 1 }
+//   } catch (error) {
+//     console.error('Delete product error:', error)
+//     return { success: false, error: 'Failed to delete product' }
+//   }
+// }
+
+
 function calculateTotal(cart, sgst, cgst, includeSgst, includeCgst) {
   const subtotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
   const sgstAmount = includeSgst ? (subtotal * sgst) / 100 : 0;

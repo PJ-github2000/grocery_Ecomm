@@ -6,11 +6,11 @@ import { motion } from "motion/react";
 export const DrawCircleText = () => {
   return (
     <div className="text-yellow-50">
-      <h1 className=" text-center text-rose-300 text-3xl sm:text-5xl leading-snug">
+      <h1 className=" text-center text-rose-300 text-3xl sm:text-5xl leading-2">
       <span className="hidden md:inline-block">
       Streamline Grocery{" - "}
-        </span> LogIn to {" "}
-        <span className="relative inline-block text-rose-500 font-bold">
+        </span> Login to {" "}
+        <span className="relative inline-  text-rose-500 font-bold">
         Desu Provisions
           {/* <svg
             viewBox="0 0 286 73"

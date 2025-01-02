@@ -45,9 +45,9 @@ export default function RecentTransactions() {
     <div>
       <button
         onClick={handleFetchRecentTransactions}
-        className="bg-rose-400 hover:bg-rose-500 text-white px-4 py-2 rounded"
+        className="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded"
       >
-        View Recent Transactions
+        View History
       </button>
 
       {showTransactions && (
@@ -56,7 +56,15 @@ export default function RecentTransactions() {
             className="bg-white rounded shadow-lg p-6 w-full max-w-3xl h-[600px] overflow-y-auto"
             id="transactionsModalContent"
           >
-            <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
+            <div className='flex justify-between items-center'>
+            <h2 className="text-3xl  font-semibold ">Recent History</h2>
+            <button
+                onClick={() => setShowTransactions(false)}
+                className="bg-red-500 text-white px-4 py-2 rounded"
+              >
+                Close
+              </button>
+            </div>
             <ul>
               {recentTransactions.map((transaction) => (
                 <li key={transaction._id} className="border-b py-2">
@@ -81,21 +89,21 @@ export default function RecentTransactions() {
                   </ul>
                   <button
                     onClick={() => handlePrintTransaction(transaction)}
-                    className="bg-green-500 text-white px-2 py-1 mt-2 rounded"
+                    className="bg-slate-500 hover:bg-black text-white px-2 py-1 mt-2 rounded"
                   >
-                    Print This Transaction
+                    Print Bill
                   </button>
                 </li>
               ))}
             </ul>
-            <div className="flex justify-end mt-4">
+            {/* <div className="flex justify-end mt-4">
               <button
                 onClick={() => setShowTransactions(false)}
                 className="bg-red-500 text-white px-4 py-2 rounded"
               >
                 Close
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

@@ -6,12 +6,12 @@ import { Trash2 } from 'lucide-react';
 
 export default function AddGroceryModal() {
   const [isOpen, setIsOpen] = useState(false)
-  const [items, setItems] = useState([{ name: '', price: '', quantity: '' }])
+  const [items, setItems] = useState([{ name: '', price: ''}])
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const handleAddItem = () => {
-    setItems([...items, { name: '', price: '', quantity: '' }])
+    setItems([...items, { name: '', price: '' }])
   }
 
   const handleItemChange = (index, field, value) => {
@@ -33,8 +33,8 @@ export default function AddGroceryModal() {
     setIsLoading(false)
     if (result.success) {
       setMessage(result.message)
-      setItems([{ name: '', price: '', quantity: '' }])
-      setIsOpen(false) // Close the modal on successful submission
+      setItems([{ name: '', price: ''}])
+      // setIsOpen(false) // Close the modal on successful submission
     } else {
       setMessage(result.error)
     }
@@ -47,7 +47,7 @@ export default function AddGroceryModal() {
   const closeModal = () => {
     setIsOpen(false)
     setMessage('')
-    setItems([{ name: '', price: '', quantity: '' }]) 
+    setItems([{ name: '', price: ''}]) 
   }
 
   return (
@@ -120,7 +120,7 @@ export default function AddGroceryModal() {
               <button
                 type="button"
                 onClick={handleAddItem}
-                className="w-full bg-slate-500 text-white p-2 rounded hover:bg-blue-600"
+                className="w-full bg-slate-500 text-white p-2 rounded hover:bg-black"
               >
                 Add Another Item
               </button>

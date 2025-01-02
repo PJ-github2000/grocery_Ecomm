@@ -169,7 +169,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="max-w-[400px] w-[100vw]">
+    <div className="max-w-[400px] w-[100%]">
       <div className="shadow-lg p-5 rounded-lg border-t-4 border-rose-500">
         <h1 className="text-xl font-bold my-4">Register</h1>
 

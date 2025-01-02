@@ -120,17 +120,17 @@ export default function SubmissionButton() {
 
   return (
     <div>
-      <Button onClick={openModal} variant="default" className="bg-rose-400 hover:bg-rose-500">
-        View Submissions
+      <Button onClick={openModal} variant="default" className="bg-rose-600 hover:bg-rose-500">
+        View Customers
       </Button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-          <div className="relative w-auto max-w-4xl mx-auto my-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="relative w-[100%] max-w-6xl mx-auto my-6">
             <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
               <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-slate-200">
                 <h3 className="text-3xl font-semibold">
-                  Submissions
+                  Our Customers
                 </h3>
                 <button
                   className="float-right p-1 ml-auto text-3xl font-semibold leading-none text-black bg-transparent border-0 outline-none opacity-5 focus:outline-none"
@@ -147,6 +147,7 @@ export default function SubmissionButton() {
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
                   </div>
                 ) : (
+                  <div className='overflow-auto'>
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -185,6 +186,7 @@ export default function SubmissionButton() {
                       ))}
                     </TableBody>
                   </Table>
+                  </div>
                 )}
               </div>
               <div className="flex items-center justify-end p-6 border-t border-solid rounded-b border-slate-200">

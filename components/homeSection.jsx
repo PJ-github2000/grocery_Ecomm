@@ -8,6 +8,7 @@ import SearchBar from "./searchBar";
 import ProductList from "./productList";
 import AddGroceryList from "./AddGrocerryList";
 import RecentTransactions from "@/app/recenttransactions/page";
+import GroceryDataTable from "@/app/groceryData/page";
 
 
 const ShuffleHero = () => {
@@ -59,13 +60,13 @@ const ShuffleHero = () => {
     <main className="relative px-8 md:px-10 w-full h-[100%]">
       <div className="flex justify-between flex-wrap gap-4 mb-10 items-start">
         <p className="text-sm md:text-base text-gray-700">
-          It&apos;s <span className="text-rose-600">{`${timeData.time}`}</span>
+          It&apos;s <span className="text-rose-500">{`${timeData.time}`}</span>
         </p>
         <p className="text-sm md:text-base text-gray-700">
-          Day: <span className="text-rose-600">{`${timeData.date}`}</span>
+          Date: <span className="text-rose-500">{`${timeData.date}`}</span>
         </p>
         <p className="text-sm md:text-base text-gray-700">
-          Date: <span className="text-rose-600">{`${timeData.day}`}</span>
+          Day: <span className="text-rose-500">{`${timeData.day}`}</span>
         </p>
       </div>
       <div className=" min-h-[500px] h-[100%] flex flex-col justify-between">
@@ -78,9 +79,6 @@ const ShuffleHero = () => {
               {session?.user?.name}
             </span>
           </span> */}
-          <p className="text-sm md:text-lg text-slate-700 my-4 md:my-6">
-          search your products online in the store
-          </p>
           <div className="relative w-full">
             {/* <input
               type="text" 
@@ -102,9 +100,11 @@ const ShuffleHero = () => {
 
       <div className=" flex flex-end items-end flex-wrap gap-10 justify-around">
       <AddGroceryList />
+      <GroceryDataTable />
       <HomePageForm />
       <SubmissionModal />
       <RecentTransactions />
+      {/* <TranslateButton /> */}
       </div>
       </div>
     </main>

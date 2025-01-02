@@ -34,7 +34,7 @@ export default function ProductList() {
       {products.map((product) => (
         <div key={product._id} className="border p-4 rounded-md">
           <h3 className="font-bold">{product.name}</h3>
-          <p>${product.price.toFixed(2)}</p>
+          <p>Rs{product.price.toFixed(2)}</p>
           <button
             onClick={() => handleAddToCart(product._id)}
             className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
